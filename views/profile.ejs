@@ -1,7 +1,7 @@
 <p>
 ID: <%= user.id %><br/>
-Username: <%= user.username %><br/>
-Name: <%= user.displayName %><br/>
+Full name: <%= user.name.familyName %>, <%= user.name.givenName %><br/>
+Display name: <%= user.displayName %><br/>
 <% if (user.emails) { %>
 Email: <%= user.emails[0].value %><br/>
 <% } %>
