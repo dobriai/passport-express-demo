@@ -1,8 +1,20 @@
 <p>
 ID: <%= user.id %><br/>
-Full name: <%= user.name.familyName %>, <%= user.name.givenName %><br/>
 Display name: <%= user.displayName %><br/>
+Provider: <%= user['provider'] %><br/>
+
+<% if (user.name) { %>
+Full name: <%= user.name['familyName'] %>, <%= user.name['givenName'] %><br/>
+<% } %>
+
+Username: <%= user['username'] %><br/>
+
 <% if (user.emails) { %>
 Email: <%= user.emails[0].value %><br/>
 <% } %>
 </p>
+
+<p>
+<a href="/logout">logout</a>
+</p>
+

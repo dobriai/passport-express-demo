@@ -1,6 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const GitHubStrategy = require('passport-github2').Strategy;
 
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
@@ -18,6 +19,20 @@ passport.use(new GoogleStrategy({
     // A more real-life-like scenario:
     User.findOrCreate({ googleId: profile.id }, function (err, user) {
       return cb(err, user);
+    });
+  }
+));
+
+passport.use(new GitHubStrategy({
+  clientID: process.env.GITHUB_CLIENT_ID,
+  clientSecret: process.env.GITHUB_CLIENT_SECRET,
+  callbackURL: "http://localhost:3000/login/github/return"
+},
+  function (accessToken, refreshToken, profile, cb) {
+    return cb(null, profile);
+
+    User.findOrCreate({ githubId: profile.id }, function (err, user) {
+      return done(err, user);
     });
   }
 ));
@@ -74,13 +89,19 @@ app.get('/login',
   });
 
 app.get('/login/google', passport.authenticate('google', { scope: ['profile'] }));
-
 app.get('/login/google/return',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function (req, res) {
     res.redirect('/');
   });
 
+app.get('/login/github', passport.authenticate('github', { scope: [] }));
+app.get('/login/github/return',
+  passport.authenticate('github', { failureRedirect: '/login' }),
+  function (req, res) {
+    res.redirect('/');
+  });
+  
 app.get('/profile',
   require('connect-ensure-login').ensureLoggedIn(),
   function(req, res){
