@@ -108,4 +108,9 @@ app.get('/profile',
     res.render('profile', { user: req.user });
   });
 
+app.get('/logout', function (req, res) {
+  req.logout();
+  res.redirect('/');
+});
+
 app.listen(3000);
