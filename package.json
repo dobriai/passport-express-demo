@@ -1,5 +1,5 @@
 {
-  "name": "express-4.x-facebook-example",
+  "name": "passport-express-demo",
   "version": "0.0.0",
   "description": "Express 4.x app using Passport for authentication with Facebook.",
   "keywords": [
@@ -7,15 +7,15 @@
     "express",
     "passport"
   ],
-  "author": "Jared Hanson",
+  "author": "Ivan",
   "license": "Unlicense",
-  "homepage": "https://github.com/passport/express-4.x-facebook-example",
+  "homepage": "https://github.com/dobriai/passport-express-demo",
   "repository": {
     "type": "git",
-    "url": "git://github.com/passport/express-4.x-facebook-example.git"
+    "url": "https://github.com/dobriai/passport-express-demo.git"
   },
   "bugs": {
-    "url": "https://github.com/passport/express-4.x-facebook-example/issues"
+    "url": "https://github.com/dobriai/passport-express-demo/issues"
   },
   "dependencies": {
     "body-parser": "^1.13.2",

@@ -15,7 +15,7 @@ dependencies.
 ```bash
 $ git clone git@github.com:dobriai/passport-express-demo.git
 $ cd passport-express-demo
-$ npm install
+$ yarn # OR: npm install
 ```
 
 The example uses environment variables to configure the consumer key and
