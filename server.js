@@ -69,7 +69,18 @@ app.set('view engine', 'ejs');
 app.use(require('morgan')('combined'));
 app.use(require('cookie-parser')());
 app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(require('express-session')({ secret: '3kpN79Y8wFp0jhSU', resave: true, saveUninitialized: true }));
+const session = require('express-session');
+const SQLiteStore = require('connect-sqlite3')(session);
+app.use(session({
+  store: new SQLiteStore({
+    dir: './db',
+    db: 'sqlite3-sessions',
+    // table: --leave to defaule---
+  }),
+  secret: '3kpN79Y8wFp0jhSU',
+  resave: true,
+  saveUninitialized: true,
+}));
 
 // Initialize Passport and restore authentication state, if any, from the
 // session.
@@ -101,7 +112,7 @@ app.get('/login/github/return',
   function (req, res) {
     res.redirect('/');
   });
-  
+
 app.get('/profile',
   require('connect-ensure-login').ensureLoggedIn(),
   function(req, res){
